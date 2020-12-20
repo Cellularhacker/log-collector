@@ -24,7 +24,7 @@ func InitQuestDB() {
 	}
 
 	log.Println("InitQuestDB() - Connected")
-	defer questDbConn.Close()
+	//defer questDbConn.Close()
 }
 
 func GetQuestDBConn() *net.Conn {

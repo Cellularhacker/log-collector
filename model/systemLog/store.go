@@ -1,9 +1,10 @@
 package systemLog
 
 import (
-	"fmt"
-	"log-collector/data"
+	"database/sql"
 	"log-collector/model/_util/pageInfo"
+
+	_ "github.com/lib/pq"
 )
 
 func GetByPageInfo(pi *pageInfo.Request) ([]SystemLog, *pageInfo.Response, error) {
@@ -11,11 +12,18 @@ func GetByPageInfo(pi *pageInfo.Request) ([]SystemLog, *pageInfo.Response, error
 }
 
 func Create(s *SystemLog) error {
-	conn := *data.GetQuestDBConn()
-	_, err := conn.Write(s.ToInfluxSQL())
+	db, err := sql.Open("postgres", "host=localhost port=8812 user=admin password=quest dbname=qdb sslmode=disable")
 	if err != nil {
-		return fmt.Errorf("conn.Write(s.ToInfluxSQL()): %s", err)
+		return err
 	}
+
+	defer db.Close()
+
+	rows, err := db.Query(s.ToPQSQL())
+	if err != nil {
+		return err
+	}
+	defer rows.Close()
 
 	return nil
 }

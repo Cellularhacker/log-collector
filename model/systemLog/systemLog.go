@@ -16,3 +16,7 @@ func New() *SystemLog {
 func (s *SystemLog) ToInfluxSQL() []byte {
 	return []byte(fmt.Sprintf("system_log,from=%s type=%s value=%s %d\n", s.From, s.Type, s.Value, s.CreatedAt))
 }
+
+func (s *SystemLog) ToPQSQL () string {
+	return fmt.Sprintf("insert into system_logs values('%s', '%s', '%s', %d);", s.From, s.Type, s.Value, s.CreatedAt)
+}
