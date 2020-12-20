@@ -15,17 +15,13 @@ var MonitorChatID = ""
 var BlackCowChatID = ""
 
 func init() {
-	Token = os.Getenv("PARSER_TELEGRAM_ACCESS_TOKEN")
+	Token = os.Getenv("LOGCOLLECTOR_TELEGRAM_ACCESS_TOKEN")
 	if Token == "" {
-		log.Fatalln("PARSER_TELEGRAM_ACCESS_TOKEN missing")
+		log.Fatalln("LOGCOLLECTOR_TELEGRAM_ACCESS_TOKEN missing")
 	}
-	MonitorChatID = os.Getenv("PARSER_TELEGRAM_CHAT_ID_MONITOR")
+	MonitorChatID = os.Getenv("LOGCOLLECTOR_TELEGRAM_CHAT_ID_MONITOR")
 	if MonitorChatID == "" {
-		log.Fatalln("PARSER_TELEGRAM_CHAT_ID_MONITOR missing")
-	}
-	BlackCowChatID = os.Getenv("PARSER_TELEGRAM_CHAT_ID_NOTICE")
-	if BlackCowChatID == "" {
-		log.Fatalln("PARSER_TELEGRAM_CHAT_ID_NOTICE missing")
+		log.Fatalln("LOGCOLLECTOR_TELEGRAM_CHAT_ID_MONITOR missing")
 	}
 }
 

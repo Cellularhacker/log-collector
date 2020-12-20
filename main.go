@@ -4,6 +4,7 @@ import (
 	"github.com/chyeh/pubip"
 	"github.com/rs/cors"
 	"log-collector/config"
+	"log-collector/data"
 
 	"fmt"
 	"log"
@@ -21,6 +22,8 @@ var pubIP = ""
 var hostname = ""
 
 func init()  {
+	data.InitDBs()
+
 	telegram.Init()
 }
 
