@@ -41,5 +41,10 @@ func SystemLogsPOST(w http.ResponseWriter, r *http.Request, _ httprouter.Params)
 		return apiError.BadRequestError("body")
 	}
 
+	err = systemLog.Create(log)
+	if err != nil {
+		return apiError.InternalServerError(err)
+	}
+
 	return util.SendDataResponse(w, nil, nil, http.StatusCreated)
 }
